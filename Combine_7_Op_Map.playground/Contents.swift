@@ -95,7 +95,7 @@ sample(of: "Map with fields") {
         .sink { completion in
         print("Completed: ", completion)
     } receiveValue: {
-        print("Received NickName: ", $0)
+        print("Received Company NameSu: ", $0)
     }.store(in: &subscriptions)
 
     subject.send(User(name: "Elon", surname: "Musk", company: "Tesla"))
