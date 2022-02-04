@@ -86,3 +86,19 @@ sample(of: "Map with CurrentValueSubject Complete With Failure") {
 
     print("Current Value of Subject: ", subject.value)
 }
+
+sample(of: "Map with fields") {
+    let subject = PassthroughSubject<User, Never>()
+    let publisher = subject.eraseToAnyPublisher()
+
+    publisher.map(\.company)
+        .sink { completion in
+        print("Completed: ", completion)
+    } receiveValue: {
+        print("Received NickName: ", $0)
+    }.store(in: &subscriptions)
+
+    subject.send(User(name: "Elon", surname: "Musk", company: "Tesla"))
+    subject.send(User(name: "Steve", surname: "Jobs", company: "Apple"))
+    subject.send(completion: .finished)
+}
