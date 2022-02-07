@@ -1,8 +1,6 @@
 import UIKit
 import Combine
 
-var greeting = "Hello, playground"
-
 var subscriptions = Set<AnyCancellable>()
 
 sample(of: "ReplaceNil") {
