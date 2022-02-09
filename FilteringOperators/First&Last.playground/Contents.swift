@@ -45,7 +45,7 @@ sample(of: "last(where: )") {
     }.store(in: &subscriptions)
 }
 
-sample(of: "last(where: ) exist") {
+sample(of: "last(where: ) not exist") {
     let values: [String] = ["James", "Harden", "Steph", "Durant", "Wade", "Westbrook", "Davis", "Jokic", "Morant", "Fox"]
 
     let publisher = values.publisher
