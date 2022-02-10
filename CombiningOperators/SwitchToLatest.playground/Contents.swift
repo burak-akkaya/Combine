@@ -32,7 +32,7 @@ sample(of: "switchToLatest - Network Request") {
 
     taps
         .map { value in getImage(value) }
-        .switchToLatest() // 4
+        .switchToLatest()
         .sink(receiveValue: { _ in })
         .store(in: &subscriptions)
 
