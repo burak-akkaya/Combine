@@ -8,6 +8,8 @@ public func sample(of description: String, delay: TimeInterval = 0.0, action: @e
     }
 }
 
+
+
 public class UploadRate {
     public var rate: Int
 
@@ -36,10 +38,24 @@ public class NetworkManager {
 
     public init() {
         subject = PassthroughSubject<UploadRate, Never>()
+    }
 
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
-            let rate = Int.random(in: 1...100)
-            self.subject.send(UploadRate(rate: rate))
-        })
+    private func send(value: UploadRate, delay: TimeInterval) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            self.subject.send(value)
+        }
+    }
+
+    public func send() {
+        send(value: UploadRate(rate: 1), delay: 0.1)
+        send(value: UploadRate(rate: 2), delay: 0.6)
+        send(value: UploadRate(rate: 3), delay: 0.7)
+        send(value: UploadRate(rate: 4), delay: 0.9)
+        send(value: UploadRate(rate: 5), delay: 1.6)
+        send(value: UploadRate(rate: 6), delay: 1.7)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.subject.send(completion: .finished)
+        }
     }
 }
